@@ -1,0 +1,513 @@
+ If you want to access elements of the inner arrays, you will have to specify an index 
+twice: 
+let value1 = arrOfArrays[0][1];
+ The statement will grab the first array because it has an index position of 0. From this 
+f
+ irst array, it will take the second value, because it has an index position of 1. Then it 
+stores this value in value1. That means the value of value1 will be 2. Can you figure 
+out what the value of the next one will be?
+ let value2 = arrOfArrays[2][2];
+ It takes the third array, and from this third array, it takes the third value. Thus, 9 will 
+be stored in value2. And it does not stop here; it can go many levels deep. Let's show 
+that by creating an array of our array of arrays. We are simply going to store this 
+array three times in another array:
+ arrOfArraysOfArrays = [arrOfArrays, arrOfArrays, arrOfArrays];
+ This is what the array looks like in terms of values:
+ [
+ ]
+  [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ] ],
+  [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ] ],
+  [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ] ]
+ Let's get the middle element of this array, which is the value 5, belonging to the 
+second array of arrays. It is done like this:
+ let middleValue = arrOfArraysOfArrays[1][1][1];
+ The first step is to get the second array of arrays, so index 1. Then we need to get 
+the second array of this one, which again is index 1. Now we reach the level of the 
+values, and we need the second value, so again we use index 1. This is useful in 
+many situations, for example, when you want to work with matrices.
+ Practice exercise 3.3
+ 1. Create an array containing three values: 1, 2, and 3.
+ 2. Nest the original array into a new array three times.
+ 3. Output the value 2 from one of the arrays into the console.
+ [ 60 ]
+Chapter 3
+ Objects in JavaScript
+ Now it is time to have a look at another complex data structure that can contain 
+more than one value: objects! Objects are very useful and can be used to describe 
+real-life objects as well as more complex abstract concepts that allow for more 
+f
+ lexibility in your code.
+ Secretly, you have just been introduced to objects already, because arrays are a 
+very special type of object. Arrays are objects with indexed properties. All the other 
+objects, and also the objects we will see here, are objects with named properties. This 
+means that instead of an automatically generated index number, we will give it a 
+custom descriptive name.
+ As we can tell from the following code, arrays are defined by JavaScript as being of 
+the object type:
+ let arr = [0, 1, 2];
+ console.log(typeof arr);
+ The output of the preceding code is as follows:
+ Object
+ Objects are not too dissimilar to real-world objects. They have properties and they can 
+perform actions, methods. Here, we will only deal with the properties. We will cover 
+methods in Chapter 7, Classes, after we have seen functions. An object is a chance to 
+group multiple variables into one. This is done with curly brackets: { and }. Let's 
+have a look at this object of a dog here:
+ let dog = { dogName: "JavaScript", 
+weight: 2.4, 
+color: "brown", 
+breed: "chihuahua", 
+age: 3, 
+burglarBiter: true 
+          };
+ We created a variable, dog, and we gave this an object as a value. We can recognize 
+that this is an object by seeing the { and }. In between the curly braces, we see a bunch 
+of properties and their values.
+ [ 61 ]
+JavaScript Multiple Values
+ If you have ever wondered whether something should be a property, just try the 
+following template sentence in your head: 
+*objectname* has a(n) *property name*
+ For example, a dog has a name, a dog has a color, and a dog has a weight. This is 
+slightly different for the Boolean properties, for which you can use "is" or "is not" 
+instead of "has".
+ We can access the properties of this object in a very similar way as we would 
+with the array. This time, we are not using the index number, but the name of the 
+property, to get the value:
+ let dogColor1 = dog["color"];
+ There is another way to do this. Instead of the square brackets, the property name 
+can also be added to the object name with a dot in between:
+ let dogColor2 = dog.color;
+ This might look familiar. Do you remember how we got the length of an array with 
+the built-in property length? Yes—the same way! The difference between properties 
+and methods is the lack of parentheses for properties. 
+Updating objects
+ We can change the value of the properties of the objects. Again, this is similar to an 
+array because an array is an object as well, but for properties, we have two options:
+ dog["color"] = "blue";
+ dog.weight = 2.3;
+ This has changed the properties of our chihuahua JavaScript. The color gets updated 
+to blue and it has lost a little bit of weight since the new weight is 0.1 lower. So if we 
+log our dog:
+ console.log(dog);
+ We will get the following:
+ {
+  dogName: 'JavaScript',
+  weight: 2.3,
+  color: 'blue',
+ [ 62 ]
+Chapter 3
+  breed: 'chihuahua',
+  age: 3,
+  burglarBiter: true
+ }
+ It's useful to note that if we change the data type of one of our properties, for 
+example:
+ dog["age"] = "three";
+ This is not a problem. JavaScript will just change the whole value and data type to 
+the new situation.
+ Another element to note is that we are now using the literal string values to refer to 
+the object's properties, but we can also work with variables to achieve this. So, for 
+example:
+ let variable = "age";
+ console.log(dog[variable]);
+ This will still output three, as we just changed the value of age to three. If we change 
+the value of the variable to another dog property, we will be accessing another 
+property, like this:
+ variable = "breed";
+ console.log(dog[variable]);
+ This will print chihuahua. And when we update the value accessing this way, it is 
+the exact same as when we would have accessed it with the literal string:
+ dog[variable] = "dachshund";
+ console.log(dog["breed"]);
+ So, this will log dachshund to the console.
+ Practice exercise 3.4
+ 1. Create a new myCar object for a car. Add some properties, including, but not 
+limited to, make and model, and values for a typical car or your car. Feel free 
+to use booleans, strings, or numbers.
+ [ 63 ]
+JavaScript Multiple Values
+ 2. Create a variable that can hold the string value color. This variable 
+containing a string value color can now be used to reference the property 
+name within myCar. Then, use the variable within the square bracket notation 
+to assign a new value to the color property in myCar.
+ 3. Use that same variable and assign a new property string value to it, such as 
+forSale. Use the bracket notation once again to assign a new value to the 
+forSale property to indicate whether the car is available for purchase.
+ 4. Output make and model into the console.
+ 5. Output the value of forSale into the console.
+ Working with objects and arrays
+ When working with objects and arrays, you will see these often combined. In the 
+last section of this chapter, we will deal with combining objects and arrays, and 
+also objects inside objects.
+ Objects in objects
+ Let's say we want to have an object for a company. This company will have an 
+address. And an address is another object. If we give our company an address, 
+we are using an object inside an object:
+ let company = { companyName: "Healthy Candy",
+ activity: "food manufacturing",
+ address: {
+ street: "2nd street",
+ number: "123",
+ zipcode: "33116",
+ city: "Miami",
+ state: "Florida"
+                },
+ yearOfEstablishment: 2021 
+              };
+ As you can see, our company object has an address object with values. This can go 
+very many levels deep if necessary.
+ [ 64 ]
+Chapter 3
+ To access or modify one of the properties of the address here, we can use two 
+approaches:
+ company.address.zipcode = "33117";
+ company["address"]["number"] = "100";
+ As you can see, this is very similar to the array. We first need to select the address 
+and then do the same thing to access the property we want to change.
+ Arrays in objects
+ Our company might have a range of activities instead of one. We can simply replace 
+the activity from our previous sample with an array:
+ company = { companyName: "Healthy Candy",
+ activities: ["food manufacturing", 
+"improving kids' health", "manufacturing toys"],
+ address: {
+ street: "2nd street",
+ number: "123",
+ zipcode: "33116",
+ city: "Miami",
+ state: "Florida"
+                },
+ yearOfEstablishment: 2021 
+              };
+ We have now used an array in our company object. You can simply use an array 
+with the square braces after the property. Retrieving the individual values is very 
+similar. The second value of the activities array can be fetched using this statement:
+ let activity = company.activities[1];
+ Here, we call the object we're interested in, company, then the relevant array, 
+activities, with reference to the index position of the variable we're looking for 
+within the array, which is 1.
+ [ 65 ]
+JavaScript Multiple Values
+ [ 66 ]
+ Objects in arrays
+ It is very possible that instead of one address, our company has a list of addresses. 
+We can accomplish this by creating an array of address objects. In this case, we will 
+create an array of two:
+ let addresses = [{
+    street: "2nd street",
+    number: "123",
+    zipcode: "33116",
+    city: "Miami",
+    state: "Florida"
+  },
+  {
+    street: "1st West avenue",
+    number: "5",
+    zipcode: "75001",
+    city: "Addison",
+    state: "Texas"
+  }];
+ So, the arrays can be recognized by the square brackets and the objects by the curly 
+brackets. The street name of the first object can be fetched using this statement:
+ let streetName = addresses[0].street;
+ Here, we call the array we're interested in, addresses, with reference to the index 
+position of the object we're looking for within the array, 0, and then the required 
+variable from within the object, which is street. This may seem complicated, but 
+you may notice that this simply reverses the syntax required to retrieve a variable 
+from an array inside an object from the previous section. It's worth practicing calling 
+variables from nested arrays and objects until you're comfortable with it!
+ Objects in arrays in objects
+ Just to show that this can go as many levels as we would need, we are going to give 
+our company object an array of address objects. So, let's add this array of address 
+objects to our company object. This way, our company has an array of addresses:
+  company = { companyName: "Healthy Candy",
+                    activities: [ "food manufacturing", 
+"improving kids' health", 
+Chapter 3
+ [ 67 ]
+ "manufacturing toys"],
+                    address: [{
+                      street: "2nd street",
+                      number: "123",
+                      zipcode: "33116",
+                      city: "Miami",
+                      state: "Florida"
+                    },
+                    {
+                      street: "1st West avenue",
+                      number: "5",
+                      zipcode: "75001",
+                      city: "Addison",
+                      state: "Texas"
+                    }],
+                    yearOfEstablishment: 2021 
+                  };
+ To access elements of increasingly nested objects and arrays, we simply extend 
+the same logic you have seen in the previous sections. To access the street name of 
+Healthy Candy's first address, we can use the following code:
+ let streetName = company.address[0].street;
+ As you see, we can stack object and array element requests indefinitely. 
+We will not make it any more complicated than this for now. Whenever you need 
+a list of something, you will be using an array. Whenever you want to represent 
+something with properties that have descriptive names, it is better to use an object. 
+Just remember that object properties can be of any type.
+ Practice exercise 3.5
+ 1. Create an object named people that contains an empty array that is called 
+friends.
+ 2. Create three variables, each containing an object, that contain one of your 
+friend's first names, last names, and an ID value.
+ 3. Add the three friends to the friend array.
+ 4. Output it to the console.
+JavaScript Multiple Values
+ Chapter projects
+ Manipulating an array
+ Take the following array: 
+const theList = ['Laurence', 'Svekis', true, 35, null, undefined, 
+{test: 'one', score: 55}, ['one', 'two']];
+ Manipulate your array using various methods, such as pop(), push(), shift(), and 
+unshift(), and transform it into the following:
+ ["FIRST", "Svekis", "MIDDLE", "hello World", "LAST"]
+ You can take the following steps, or adopt your own approach:
+ • Remove the first item and the last item.
+ • Add FIRST to the start of the array.
+ • Assign hello World to the fourth item value.
+ • Assign MIDDLE to the third index value.
+ • Add LAST to the last position in the array.
+ • Output it to the console.
+ Company product catalog
+ In this project, you will implement a data structure for a product catalog and create 
+queries to retrieve data.
+ 1. Create an array to hold an inventory of store items.
+ 2. Create three items, each having the properties of name, model, cost, and 
+quantity.
+ 3. Add all three objects to the main array using an array method, and then log 
+the inventory array to the console.
+ 4. Access the quantity element of your third item, and log it to the console. 
+Experiment by adding and accessing more elements within your data 
+structure.
+ [ 68 ]
+Chapter 3
+ Self-check quiz
+ 1. Can you use const and update values within an array?
+ 2. Which property in an array gives the number of items contained in the array?
+ 3. What is the output in the console?
+ const myArr1 = [1,3,5,6,8,9,15];
+ console.log(myArr1.indexOf(0));
+ console.log(myArr1.indexOf(3));
+ 4. How do you replace the second element in an array myArr = 
+[1,3,5,6,8,9,15] with the value 4?
+ 5. What is the output in the console?
+ const myArr2 = [];
+ myArr2[10] = 'test'
+ console.log(myArr2);
+ console.log(myArr2[2]);
+ 6. What is the output in the console?
+ const myArr3 = [3,6,8,9,3,55,553,434];
+ myArr3.sort();
+ myArr3.length = 0;
+ console.log(myArr3[0]);
+ Summary
+ So, in this chapter, we have seen arrays and objects. Arrays are a list of values. These 
+could be values of the same type, but also values of different types. Every element 
+of the array gets an index. The index of the first element is 0. We can access the 
+elements of the array using this index. We can also use this index to change and 
+delete the element.
+ We then saw that it is also possible to have arrays containing other arrays; these are 
+multidimensional arrays. To access the elements of a multidimensional array, you 
+would need to use as many indices as you have nested arrays. 
+Then, we covered objects and learned that arrays are a special kind of object. Objects 
+contain properties and methods. We looked at the properties of objects and saw that 
+these properties are given a name and can be accessed and modified using this name. 
+We ended this module by looking at how arrays can contain objects, and how objects 
+can contain arrays and more. This enables us to create complex object structures, 
+which will be of great use in designing real-life applications.
+ [ 69 ]
+
+4
+ Logic Statements
+ Up to this point, our code has been rather static. It will do the same thing every time 
+we execute it. In this chapter, that is all going to change. We will be dealing with 
+logical statements. Logical statements allow us to make multiple paths in our code. 
+Depending on the outcome of a certain expression, we will follow one code path or 
+another.
+ There are different logic statements, and we will go over them in this chapter. We 
+will start with if and if else statements. After that, we will be dealing with the 
+ternary operator, and the final one we will be dealing with is the switch statement.
+ Along the way, we will cover the following topics:
+ • if and if else statements
+ • else if statements
+ • Conditional ternary operators
+ • switch statements
+ Note: exercise, project and self-check quiz answers can be found in 
+the Appendix.
+ [ 71 ]
+Logic Statements
+ if and if else statements
+ We can make decisions in our code using if and if else statements. It is very much 
+like this template: 
+if *some condition is true*, then *a certain action will happen*, else *another action will 
+happen* 
+For example, if it is raining then, I will take my umbrella, else I will leave my 
+umbrella at home. It is not that much different in code:
+ let rain = true;
+ if(rain){
+ console.log("** Taking my umbrella when I need to go outside **");
+ } else {
+ console.log("** I can leave my umbrella at home **");
+ }
+ In this case, the value of rain is true. And therefore, it will log to the console:
+ ** Taking my umbrella when I need to go outside **
+ But let's first take a step back and look at the syntax. We start with the word "if." After 
+this, we get something within parentheses. Whatever is between these parantheses 
+will be translated to a Boolean. If the value of this Boolean is true, it will execute the 
+block of code associated with if. You can recognize this block by the curly braces. 
+The next block is optional; it is an else block. It starts with the word "else" and is 
+only executed in case of the Boolean having the value false. If there is no else block 
+and the condition evaluates to false, the program will just skip ahead to the code 
+underneath the if.
+ Only one of these two blocks will be executed; the if block when the expression is 
+true, and the else block when the expression is false:
+ if(expression) {
+ // code associated with the if block
+ // will only be executed if the expression is true
+ } else {
+ }
+ // code associated with the else block
+ // we don't need an else block, it is optional
+ // this code will only be executed if the expression is false
+ [ 72 ]
+Chapter 4
+ [ 73 ]
+ Here is another example. If the age is below 18, log to the console that access is 
+denied, otherwise log to the console that the person is allowed to come in:
+ if(age < 18) {
+  console.log("We're very sorry, but you can't get in under 18");
+ } else {
+  console.log("Welcome!");
+ }
+ There is a common coding mistake related to if statements. I have made it in the 
+following code snippet. Can you see what this code does?
+ let hobby = "dancing";
+ if(hobby == "coding"){
+  console.log("** I love coding too! **");
+ } else {
+  console.log("** Can you teach me that? **");
+ }
+ It will log the following:
+ ** I love coding too! **
+ That might surprise you. The problem here is the single equal sign in the if 
+statement. Instead of evaluating the condition, it is assigning coding to hobby. And 
+then it is converting coding to a Boolean, and since it is not an empty string, it will 
+become true, so the if block will be executed. So, always remember to use the double 
+equal sign in this case.
+ Let's test our knowledge with a practice exercise.
+ Practice exercise 4.1
+ 1. Create a variable with a Boolean value.
+ 2. Output the value of the variable to the console.
+ 3. Check whether the variable is true and if so, output a message to the console, 
+using the following syntax:
+ if(myVariable){
+ //action
+ } 
+Logic Statements
+ 4. Add another if statement with an ! in front of the variable to check whether 
+the condition is not true, and create a message that will be printed to the 
+console in that instance. You should have two if statements, one with an 
+! and the other without. You could also use an if and an else statement 
+instead—experiment!
+ 5. Change the variable to the opposite to see how the result changes.
+ else if statements
+ A variation of the if statement is an if statement with multiple else if blocks. 
+This can be more efficient in certain situations because you are always only going 
+to execute one or zero blocks. If you have many if else statements underneath one 
+another, they are going to be evaluated and possibly executed even though one of 
+the ones above already had a condition evaluate to true and proceeded to execute 
+the associated code block.
+ Here is the written template: 
+If *a value falls into a certain category*, then *a certain action will happen*, else if *the 
+value falls into a different category than the previous statement*, then *a certain action will 
+happen*, else if *the value falls into a different category than either of the previous brackets*, 
+then *a certain action will happen*
+ For example, take this statement, to determine what the ticket price should be. If 
+a person is younger than 3, then access is free, else if a person is older than 3 and 
+younger than 12, then access is 5 dollars, else if a person is older than 12 and younger 
+than 65, then access is 10 dollars, else if a person is 65 or older, then access is 7 
+dollars:
+ let age = 10;
+ let cost = 0;
+ let message;
+ if (age < 3) {
+    cost = 0;
+    message = "Access is free under three.";
+ } else if (age >= 3 && age < 12) {
+    cost = 5;
+    message ="With the child discount, the fee is 5 dollars";
+ } else if (age >= 12 && age < 65) {
+    cost = 10;
+    message ="A regular ticket costs 10 dollars.";
+ [ 74 ]
+Chapter 4
+ } else {
+    cost = 7;
+    message ="A ticket is 7 dollars.";
+ }
+ console.log(message);
+ console.log("Your Total cost "+cost);
+ Chances are that you will think the code is easier to read than the written template. 
+In that case, nicely done! You are really starting to think like a JavaScript developer 
+already. 
+The code gets executed top to bottom, and only one of the blocks will be executed. 
+As soon as a true expression is encountered, the other ones will be ignored. This is 
+why we can also write our sample like this:
+ if(age < 3){
+ console.log("Access is free under three.");
+ } else if(age < 12) {
+ console.log("With the child discount, the fee is 5 dollars");
+ } else if(age < 65) {
+ console.log("A regular ticket costs 10 dollars.");
+ } else if(age >= 65) {
+ console.log("A ticket is 7 dollars.");
+ }
+ Practice exercise 4.2
+ 1. Create a prompt to ask the user's age
+ 2. Convert the response from the prompt to a number
+ 3. Declare a message variable that you will use to hold the console message for 
+the user
+ 4. If the input age is equal to or greater than 21, set the message variable to 
+confirm entry to a venue and the ability to purchase alcohol
+ 5. If the input age is equal to or greater than 19, set the message variable to 
+confirm entry to the venue but deny the purchase of alcohol
+ 6. Provide a default else statement to set the message variable to deny entry if 
+none are true
+ 7. Output the response message variable to the console
+ [ 75 ]
+Logic Statements
+ Conditional ternary operators
+ We did not actually discuss this very important operator in our section on operators 
+in Chapter 2, JavaScript Essentials. This is because it helps to understand the if else 
+statement first. Remember that we had a unary operator that was called a unary 
+operator because it only had one operand? This is why our ternary operator has its 
+name; it has three operands. Here is its template:
+ operand1 ? operand2 : operand3;
+ operand1 is the expression that is to be evaluated. If the value of the expression is 
+true, operand2 gets executed. If the value of the expression is false, operand3 gets 
+executed. You can read the question mark as "then" and the colon as "else" here:
+ expression ? statement for true : statement associated with false;
+ The template for saying it in your head should be: 
+if *operand1*, then *operand2*, else *operand3*
+ Let's have a look at a few examples:
+ let access = age < 18 ? "denied" : "allowed";
+ This little code snippet will assign a value to access. If age is lower than 18, then it 
+will assign the value denied, else it will assign the value allowed. You can also specify 
+an action in a ternary statement, like this:
+ age < 18 ? console.log("denied") : console.log("allowed");
+ This syntax can be confusing at first. The template of what to say in your head 
+while reading it can really come to the rescue here. You can only use these ternary 
+operators for very short actions, so it's best practice to use the ternary operator 
+in these instances as it makes code easier to read. However, if the logic contains 
+multiple comparison arguments, you'll have to use the regular if-else.
+ Practice exercise 4.3
+ 1. Create a Boolean value for an ID variable
+ 2. Using a ternary operator, create a message variable that will check whether 
+their ID is valid and either allow a person into a venue or n
