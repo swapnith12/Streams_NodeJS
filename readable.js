@@ -7,14 +7,6 @@ const readableStream = fs.createReadStream(pathToFile,{encoding: 'utf-8'});
 
 readableStream.on('data',(chunk)=>{
     console.log('New chunk received:',chunk);
-    const writable = process.stdout.write(chunk)
-    // if in api res.write() works 
-    if(!writable){
-        readableStream.pause
-    }
-})
-readableStream.on('drain',()=>{
-    readableStream.pause()
 })
 readableStream.on('end',()=>{
     console.log('No more data to read.');

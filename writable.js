@@ -22,3 +22,14 @@ writableStream.on('drain',()=>{
     console.log('Writable stream drained, resuming readable stream.');
     readableStream.resume();
 });
+//no need above if pipe used 
+// it does below code 
+// readable.on("data", (chunk) => {
+//   if (!writable.write(chunk)) {
+//     readable.pause();
+//   }
+// });
+
+// writable.on("drain", () => {
+//   readable.resume();
+// });
